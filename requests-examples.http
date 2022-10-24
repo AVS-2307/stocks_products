@@ -1,0 +1,97 @@
+# примеры API-запросов
+
+@baseUrl = http://localhost:8000/api/v1
+
+# создание продукта
+POST {{baseUrl}}/products/
+Content-Type: application/json
+
+{
+  "title": "Помидор>",
+  "description": "Лучшие помидоры на рынке"
+}
+
+###
+
+# получение продуктов
+GET {{baseUrl}}/products/
+Content-Type: application/json
+
+###
+
+# обновление продукта
+PATCH {{baseUrl}}/products/3/
+Content-Type: application/json
+
+{
+  "description": "Баклажан - агонь!!!"
+}
+
+###
+
+# удаление продукта
+DELETE {{baseUrl}}/products/2/
+Content-Type: application/json
+
+###
+
+# поиск продуктов по названию и описанию
+GET {{baseUrl}}/products/?search=бакл
+Content-Type: application/json
+
+###
+
+# создание склада
+POST {{baseUrl}}/stocks/
+Content-Type: application/json
+
+{
+  "address": "Адрес 8",
+  "positions": [
+    {
+      "product": 3,
+      "quantity": 500,
+      "price": 11.00
+    },
+    {
+      "product": 4,
+      "quantity": 300,
+      "price": 18
+    },
+    {"product": 2,
+      "quantity": 850,
+      "price": 17}
+  ]
+}
+
+###
+
+# обновляем записи на складе
+PATCH {{baseUrl}}/stocks/18/
+Content-Type: application/json
+
+{
+  "positions": [
+    {
+      "product": 2,
+      "quantity": 1,
+      "price": 1
+    },
+    {
+      "product": 3,
+      "quantity": 5,
+      "price": 2
+    }
+  ]
+}
+
+###
+
+# поиск складов, где есть определенный продукт
+GET {{baseUrl}}/stocks/?products=4
+Content-Type: application/json
+
+###
+
+GET {{baseUrl}}/stocks/?search=бакл
+Content-Type: application/json
