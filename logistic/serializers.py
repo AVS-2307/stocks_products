@@ -27,12 +27,13 @@ class StockSerializer(serializers.ModelSerializer):
     #     # достаем связанные данные для других таблиц
     #     positions = validated_data.pop('positions')
     #     stock = super().update_or_create(instance, validated_data)
-    #     StockProduct.objects.update_or_create(stock=['stock_id'], product=['product_id'], defaults={'price': positions.price, 'quantity': positions.quantity})
+    #     StockProduct.objects.update_or_create(stock=['stock_id'], product=['product_id'],
+    #     defaults={'price': positions.price, 'quantity': positions.quantity})
     #     return stock
 
     def create(self, validated_data):
         positions = validated_data.pop('positions')
-        stock = Stock.objects.create(**validated_data)
+        stock = super().create(validated_data)
         for position in positions:
             StockProduct.objects.create(stock=stock, **position)
         # print(positions)
